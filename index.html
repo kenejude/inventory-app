@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        #inventory-form {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        #item-input {
+            flex: 1;
+            padding: 5px;
+        }
+        
+        #quantity-input,
+        #price-input {
+            width: 80px;
+            padding: 5px;
+        }
+        
+        #add-button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Inventory App</h1>
+    
+    <form id="inventory-form">
+        <input type="text" id="item-input" placeholder="Enter item name" required>
+        <input type="number" id="quantity-input" placeholder="Quantity" required>
+        <input type="number" id="price-input" placeholder="Price" required>
+        <button type="submit" id="add-button">Add</button>
+    </form>
+    
+    <table id="inventory-table">
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </table>
+    
+    <script>
+        document.querySelector('#inventory-form').addEventListener('submit', addItem);
+        
+        function addItem(event) {
+            event.preventDefault();
+            
+            var itemInput = document.querySelector('#item-input');
+            var itemText = itemInput.value.trim();
+            
+            var quantityInput = document.querySelector('#quantity-input');
+            var quantityValue = quantityInput.value;
+            
+            var priceInput = document.querySelector('#price-input');
+            var priceValue = priceInput.value;
+            
+            if (itemText !== '' && quantityValue !== '' && priceValue !== '') {
+                var table = document.querySelector('#inventory-table');
+                
+                var newRow = document.createElement('tr');
+                
+                var itemNameCell = document.createElement('td');
+                itemNameCell.textContent = itemText;
+                newRow.appendChild(itemNameCell);
+                
+                var quantityCell = document.createElement('td');
+                quantityCell.textContent = quantityValue;
+                newRow.appendChild(quantityCell);
+                
+                var priceCell = document.createElement('td');
+                priceCell.textContent = priceValue;
+                newRow.appendChild(priceCell);
+                
+                table.appendChild(newRow);
+                
+                itemInput.value = '';
+                quantityInput.value = '';
+                priceInput.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
